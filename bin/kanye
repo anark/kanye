@@ -86,9 +86,9 @@ end
 
 # Grab as many pages as configured
 pages = []
-(1..(config["pages"])).each do |page|
+(1..(config["pages"])).each do |index|
   user = config["username"]
-  page = Kanye::Page.new(user, page)
+  page = Kanye::Page.new(user, index)
   pages << page
   
   page.download_all!
@@ -97,7 +97,7 @@ end
 if config["playlist"].to_s == "true"
   itunes = Kanye::ITunes.new
   pages.reverse.each do |page|
-    page.tracks.reverse.each do |track|
+    page.tracks.each do |track|
       begin
         itunes.add_to_playlist track.filename, Time.now.strftime("%B %Y")
         `mv #{shellescape track.filename} ~/.Trash`
