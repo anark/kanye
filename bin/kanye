@@ -99,6 +99,7 @@ if config["playlist"].to_s == "true"
   pages.reverse.each do |page|
     page.tracks.each do |track|
       begin
+        puts %{Adding "#{track.filename}" to playlist: #{Time.now.strftime("%B %Y")}}
         itunes.add_to_playlist track.filename, Time.now.strftime("%B %Y")
         `mv #{shellescape track.filename} ~/.Trash`
       rescue MacTypes::FileNotFoundError
