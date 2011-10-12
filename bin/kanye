@@ -96,10 +96,10 @@ end
 
 if config["playlist"].to_s == "true"
   itunes = Kanye::ITunes.new
+  puts %{Adding tracks to iTunes...}
   pages.reverse.each do |page|
-    page.tracks.each do |track|
+    page.tracks.reverse.each do |track|
       begin
-        puts %{Adding "#{track.filename}" to playlist: #{Time.now.strftime("%B %Y")}}
         itunes.add_to_playlist track.filename, Time.now.strftime("%B %Y")
         `mv #{shellescape track.filename} ~/.Trash`
       rescue MacTypes::FileNotFoundError
