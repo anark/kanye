@@ -54,6 +54,8 @@ module Kanye
         mp3.tag.artist = artist
         mp3.tag.title  = title
       end
+    rescue Encoding::CompatibilityError => e
+      puts "Error writing overwriting mp3 info => #{e.message}"
     end
   end
 end
