@@ -38,7 +38,7 @@ module Kanye
       keys     = @html.scan /\tkey:\s+?\'([\d\w]*)\'/
       artists  = html_doc.css('.track_name .artist').map     { |node| node.content.strip }
       titles   = html_doc.css('.track_name .artist + a').map { |node| node.content.strip }
-      [ids, keys, titles, artists].each { |a| a.flatten!; a.reverse! }
+      [ids, keys, titles, artists].each { |a| a.flatten! }
 
       ids.each_with_index do |id, i|
         @tracks << Track.new(:id  => ids[i], 
